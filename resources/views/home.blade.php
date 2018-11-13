@@ -1,36 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <painel titulo="Dashboard">
-                Teste de conteúdo...
+<pagina tamanho="10">
+    <painel titulo="Dashboard">
+        Teste de conteúdo....
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <painel titulo="Conteúdo 1" cor="blue" >
-                            Teste de conteúdo...
+        <div class="row">
+            <div class="col-md-4">
+                <caixa titulo="Pedidos" qtd="15" url="{{route('artigos.index')}}" cor="green" icone="ion ion-pie-graph"></caixa>                       
+            </div>
 
-                        </painel>                        
-                    </div>
+            <div class="col-md-4">
+                <caixa titulo="Usuários" qtd="700" cor="blue" icone="ion ion-person-stalker"></caixa>                        
+            </div>                    
 
-                    <div class="col-md-4">
-                        <painel titulo="Conteúdo 2" >
-                            Teste de conteúdo...
-
-                        </painel>                        
-                    </div>                    
-
-                    <div class="col-md-4">
-                        <painel titulo="Conteúdo 3">
-                            Teste de conteúdo...
-
-                        </painel>                        
-                    </div>                    
-                </div>
-            </painel>
+            <div class="col-md-4">
+                <caixa titulo="Autores" qtd="456" cor="red" icone="ion ion-person"></caixa>                      
+            </div>                    
         </div>
-    </div>
-</div>
+    </painel>    
+</pagina>
 @endsection

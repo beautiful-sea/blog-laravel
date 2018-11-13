@@ -11,8 +11,8 @@
 export default {
 	props:['titulo','cor'],
 	computed:{
-		defineCor: function(bg){
-			return ""+(this.cor);
+		defineCor: function(){
+			return (this.cor || "");
 		}
 	}
 };
@@ -20,13 +20,20 @@ export default {
 
 <style type="text/css">
 .blue {
-
     border-color: #0d4a96 !important;
-
 }
-.card-header > .blue {
+.blue > .card-header {
 	color: #f7f7f7!important;
     background-color: #0d4a96 !important;
+    border-color: #0d4a96 !important;
+}
 
+.orange {
+    border-color: #e85e0d !important;
+}
+.orange > .card-header {
+	color: #f7f7f7!important;
+    background-color: #e85e0d !important;
+	border-color: #e85e0d !important;
 }	
 </style>
