@@ -19,7 +19,13 @@ class ArtigosController extends Controller
             ["titulo"=>"Lista de Artigos","url"=>""]
 
         ]);
-        return view('admin.artigos.index',compact('listaMigalhas'));
+
+        $listaArtigos = json_encode([
+            ["id"=>1, "titulo"=>"PHP OO","descricao"=>"Curso de PHP OO","data" => "2017-11-20"],
+            ["id"=>2, "titulo"=>"Curso de UX","descricao"=>"Curso de User Xperience","data" => "2017-11-20"],
+            ["id"=>3,"titulo"=>'Vue JS',"descricao"=>'O curso de Vue JS',"data" => "2017-11-20"]
+        ]);
+        return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
     }
 
     /**
@@ -40,7 +46,7 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

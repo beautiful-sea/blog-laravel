@@ -8,7 +8,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-
+import Vuex from 'Vuex';
+Vue.use(Vuex);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -16,6 +17,19 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
+
+ //VUEX
+
+ const store = new Vuex.Store({
+ 	state:{
+ 		item:{}
+ 	},
+ 	mutations:{
+ 		setItem(state,obj){
+ 			state.item = obj;
+ 		}
+ 	}
+ });
 
 Vue.component('topo',require('./components/Topo.vue'));
 Vue.component('painel',require('./components/Painel.vue'));
@@ -40,5 +54,9 @@ Vue.component('formulario',require('./components/Formulario.vue'));
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store,
+    mounted: function(){
+    	document.getElementById("app").style.display = "block";
+    }
 });
