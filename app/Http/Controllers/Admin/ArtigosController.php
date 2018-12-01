@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Artigo;
 class ArtigosController extends Controller
 {
     /**
@@ -46,7 +47,10 @@ class ArtigosController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        var_dump($request);
+        $data = $request->all();
+        Artigo::create();
+        return redirect()->back();
     }
 
     /**
