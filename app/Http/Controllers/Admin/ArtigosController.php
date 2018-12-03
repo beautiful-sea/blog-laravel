@@ -33,7 +33,11 @@ class ArtigosController extends Controller
 
         $listaArtigos = Artigo::listaArtigos(5);
 
-
+        foreach ($listaArtigos as $key => $value) {
+            if($value->data){
+                $value->data = substr($value->data,0,10);
+            }
+        }
         return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
     }
 

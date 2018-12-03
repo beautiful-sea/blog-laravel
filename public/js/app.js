@@ -49314,6 +49314,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			}
 		}
 	},
+	filters: {
+		formataData: function formataData(valor) {
+			if (!valor) return '';
+			valor = valor.toString();
+			if (valor.split('-').length == 3) {
+				valor = valor.split('-');
+				return valor[2] + '/' + valor[1] + '/' + valor[0];
+			}
+			return valor;
+		}
+	},
 	computed: {
 		lista: function lista() {
 			var _this = this;
@@ -49458,7 +49469,7 @@ var render = function() {
             "tr",
             [
               _vm._l(item, function(i) {
-                return _c("td", [_vm._v(_vm._s(i))])
+                return _c("td", [_vm._v(_vm._s(_vm._f("formataData")(i)))])
               }),
               _vm._v(" "),
               _vm.detalhe || _vm.editar || _vm.deletar
@@ -50377,7 +50388,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['titulo', 'descricao', 'link', 'imagem', 'data', 'autor', 'sm', 'md']
+	props: ['titulo', 'descricao', 'link', 'imagem', 'data', 'autor', 'sm', 'md'],
+	filters: {
+		formataData: function formataData(valor) {
+			if (!valor) return '';
+			valor = valor.toString();
+			valor = valor.split('-');
+			return valor[2] + '/' + valor[1] + '/' + valor[0];
+		}
+	}
 });
 
 /***/ }),
@@ -50390,7 +50409,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { class: "card col-md-" + (_vm.md || "4") + " col-sm-" + (_vm.sm || "6") },
+    {
+      class: "card col-md-" + (_vm.md || "4") + " col-sm-" + (_vm.sm || "6"),
+      staticStyle: { padding: "10px" }
+    },
     [
       _c("img", {
         staticClass: "card-img-top",
@@ -50401,7 +50423,11 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("small", [_vm._v(_vm._s(_vm.autor) + "  - " + _vm._s(_vm.data))]),
+        _c("small", [
+          _vm._v(
+            _vm._s(_vm.autor) + "  - " + _vm._s(_vm._f("formataData")(_vm.data))
+          )
+        ]),
         _vm._v(" "),
         _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.titulo))]),
         _vm._v(" "),
