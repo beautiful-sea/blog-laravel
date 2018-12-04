@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+      $this->middleware('auth');
     }
 
     /**
@@ -26,15 +26,20 @@ class AdminController extends Controller
      */
     public function index()
     {
-       $listaMigalhas = json_encode([
-            ["titulo"=>"Admin","url"=>route('admin')]
-        ]);
+     $listaMigalhas = json_encode([
+      ["titulo"=>"Admin","url"=>route('admin')]
+    ]);
+     $user = auth()->user();
+
+     if($user->autor == "S" && $user->admin == "N"){
+       $qtdArtigos = Artigo::where("user_id","=",$user->id)->count();
+     }else{
        $qtdArtigos = Artigo::count();
-       $qtdUsuarios = User::count();
-       $qtdAutores = User::where("autor","=","S")->count();
+     }
+     $qtdUsuarios = User::count();
+     $qtdAutores = User::where("autor","=","S")->count();
+     $qtdAdmin = User::where("admin","=","S")->count();
 
-
-       // dd($listaArtigos);
-       return view('admin',compact('listaMigalhas','qtdArtigos','qtdUsuarios','qtdAutores'));
+     return view('admin',compact('listaMigalhas','qtdArtigos','qtdUsuarios','qtdAutores','qtdAdmin'));
    }
-}
+ }

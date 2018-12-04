@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use App\Artigo;
-
-class ArtigosController extends Controller
+use App\User;
+use Illuminate\Validation\Rule;
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,19 +17,12 @@ class ArtigosController extends Controller
     {
         $listaMigalhas = json_encode([
             ["titulo"=>"Admin","url"=>route('admin')],
-            ["titulo"=>"Lista de Artigos","url"=>""]
+            ["titulo"=>"Lista de Administradores","url"=>""]
 
         ]);
 
-
-        $listaArtigos = Artigo::listaArtigos(5);
-
-        foreach ($listaArtigos as $key => $value) {
-            if($value->data){
-                $value->data = substr($value->data,0,10);
-            }
-        }
-        return view('admin.artigos.index',compact('listaMigalhas','listaArtigos'));
+        $listaModelo = User::select('id','name','email')->where('admin','=','S')->paginate(5);
+        return view('admin.adm.index',compact('listaMigalhas','listaModelo'));
     }
 
     /**
@@ -54,15 +46,14 @@ class ArtigosController extends Controller
         $data = $request->all();
 
         $validacao = $request->validate([
-            'titulo'    =>  'required',
-            'descricao'    =>  'required',
-            'conteudo'    =>  'required',
-            'data'    =>  'required'
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6'],
         ]);
-        
-        $user = auth()->user();
-        $user->artigos()->create($data);
 
+        $data['password'] = bcrypt($data['password']);
+
+        User::create($data);
         return redirect()->back();
     }
 
@@ -74,7 +65,8 @@ class ArtigosController extends Controller
      */
     public function show($id)
     {
-        return Artigo::find($id);
+        return User::find($id);
+
     }
 
     /**
@@ -85,7 +77,7 @@ class ArtigosController extends Controller
      */
     public function edit($id)
     {
-        // 
+        //
     }
 
     /**
@@ -99,14 +91,23 @@ class ArtigosController extends Controller
     {
         $data = $request->all();
 
-        $validacao = $request->validate([
-            'titulo'    =>  'required',
-            'descricao'    =>  'required',
-            'conteudo'    =>  'required',
-            'data'    =>  'required'
-        ]);
+        if(isset($data['password']) && $data['password'] != ""){
+            $validacao = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
+                'password' => ['required', 'string', 'min:6'],
+            ]);
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            $validacao = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)]
+            ]); 
+            unset($data['password']); 
+        }
 
-        Artigo::find($id)->update($data);
+
+        User::find($id)->update($data);
         return redirect()->back();
     }
 
@@ -118,7 +119,7 @@ class ArtigosController extends Controller
      */
     public function destroy($id)
     {
-        Artigo::find($id)->delete();
+        User::find($id)->delete();
         return redirect()->back();
     }
 }

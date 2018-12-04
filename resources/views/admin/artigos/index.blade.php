@@ -71,7 +71,7 @@
 		</div>		
 		<div class="form-group">
 			<label for="data">Data</label>
-			<input type="date" class="form-control" id="data" name="data" v-model="$store.state.item.data">
+			<input type="datetime" class="form-control" id="data" name="data" v-model="$store.state.item.data" value="{{old('data')}}">
 		</div>
 	</formulario>
 	<span slot="botoes">

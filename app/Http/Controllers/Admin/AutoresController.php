@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Validation\Rule;
+
 class AutoresController extends Controller
 {
     /**

@@ -48900,9 +48900,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card", class: _vm.defineCor }, [
-    _c("div", { staticClass: "card-header", class: _vm.defineCor }, [
-      _vm._v(_vm._s(_vm.titulo))
-    ]),
+    _vm.titulo
+      ? _c("div", { staticClass: "card-header", class: _vm.defineCor }, [
+          _vm._v(_vm._s(_vm.titulo))
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [_vm._t("default")], 2)
   ])
@@ -49541,7 +49543,7 @@ var render = function() {
                             _c(
                               "button",
                               {
-                                staticClass: "btn btn-danger",
+                                staticClass: "btn btn-danger btn-block",
                                 attrs: { href: "#" },
                                 on: {
                                   click: function($event) {
@@ -50061,7 +50063,7 @@ var render = function() {
             ? _c(
                 "button",
                 {
-                  class: _vm.css || "btn btn-primary",
+                  class: _vm.css || "btn btn-primary btn-block",
                   attrs: {
                     type: "button",
                     "data-toggle": "modal",
@@ -50386,6 +50388,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 	props: ['titulo', 'descricao', 'link', 'imagem', 'data', 'autor', 'sm', 'md'],
@@ -50409,32 +50413,37 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      class: "card col-md-" + (_vm.md || "4") + " col-sm-" + (_vm.sm || "6"),
-      staticStyle: { padding: "10px" }
-    },
+    { class: "col-md-" + (_vm.md || "4") + " col-sm-" + (_vm.sm || "6") },
     [
-      _c("img", {
-        staticClass: "card-img-top",
-        attrs: {
-          src: "https://cdn.ahnegao.com.br/2013/08/sailor.jpg",
-          alt: "Card image cap"
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("small", [
-          _vm._v(
-            _vm._s(_vm.autor) + "  - " + _vm._s(_vm._f("formataData")(_vm.data))
+      _c("div", { staticClass: "card" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: {
+            src: "https://cdn.ahnegao.com.br/2013/08/sailor.jpg",
+            alt: "Card image cap"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("small", [
+            _vm._v(
+              _vm._s(_vm.autor) +
+                "  - " +
+                _vm._s(_vm._f("formataData")(_vm.data))
+            )
+          ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.titulo))]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(_vm._s(_vm.descricao))
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-primary", attrs: { href: _vm.link } },
+            [_vm._v("Leia Mais")]
           )
-        ]),
-        _vm._v(" "),
-        _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.titulo))]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.descricao))]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-primary", attrs: { href: _vm.link } }, [
-          _vm._v("Leia Mais")
         ])
       ])
     ]

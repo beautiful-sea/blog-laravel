@@ -35,11 +35,13 @@
                 </a>
 
                 <ul class="dropdown-menu" role="menu">
+                    @can('autor')
                     <li class="fa fa-btn">
                         <a href="{{route('admin')}}">
                         Admin
                         </a>
                     </li>
+                    @endcan
                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                 </ul>
             </li>

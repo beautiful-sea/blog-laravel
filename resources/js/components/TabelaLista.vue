@@ -30,7 +30,7 @@
 
 							<a v-if="criar && !modal" :href="editar">Editar</a>
 							<modallink v-if="criar && modal" tipo="button" nome="editar" titulo="Editar" css="" cssdiv="d-inline" :item="item" :url="editar"></modallink>
-							<button class="btn btn-danger" href="#" v-on:click="executaForm(index)">Deletar</button>
+							<button class="btn btn-danger btn-block" href="#" v-on:click="executaForm(index)">Deletar</button>
 						</form>
 						<span v-if="!token">
 							<a v-if="detalhe && !modal" :href="detalhe">Detalhe |</a>
